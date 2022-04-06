@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React from 'react'
+
+import { Container, Typography } from '@material-ui/core'
 import './App.css';
+import Breakfast from './components/Breakfast';
+
+import toValidCPFdigits from './models/Registration';
+import FormValidation from './context/FormValidation';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container 
+        component='article' 
+        maxWidth='sm'>
+          <Typography
+                variant='h3'
+                align='center'
+                component='h1'>
+            Breakfast MV
+          </Typography>
+          
+          <FormValidation.Provider value={{cpf: toValidCPFdigits}}>
+            <Breakfast whenSend={whenSending} />
+          </FormValidation.Provider>
+    </Container>
   );
+}
+
+function whenSending(data) {
+  console.log(data)
 }
 
 export default App;
